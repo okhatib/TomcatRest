@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Name: "
+                android:id="@+id/NameLbl" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/NameTxt"
+                android:layout_below="@id/NameLbl" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Age: "
+                android:layout_below="@id/NameTxt"
+                android:id="@+id/AgeLbl" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/AgeLbl"
+                android:id="@+id/AgeTxt" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/AgeTxt"
+                android:id="@+id/RadioGrp" >
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Hello World (None)"
+                    android:id="@+id/radioBtn1" />
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Hello Name (Name)"
+                    android:id="@+id/radioBtn2" />
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Selected Number (Age)"
+                    android:id="@+id/radioBtn3" />
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Entered Password (Name)"
+                    android:id="@+id/radioBtn4" />
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="MatrixParam (Both)"
+                    android:id="@+id/radioBtn5" />
+                <RadioButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="QueryParam (Both)"
+                    android:id="@+id/radioBtn6" />
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RadioGrp"
+                android:text="Get Data"
+                android:id="@+id/getDataBtn"
+                android:layout_marginTop="20px"
+                android:onClick="GetDataBtn_Click" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/getDataBtn"
+                android:id="@+id/urlLbl"
+                android:text="URL: "
+                android:layout_marginTop="50px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/urlLbl"
+                android:id="@+id/urlOutputLbl" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/urlOutputLbl"
+                android:id="@+id/outputLbl"
+                android:text="Output: "
+                android:layout_marginTop="50px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/outputLbl"
+                android:id="@+id/outputTextLbl" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
