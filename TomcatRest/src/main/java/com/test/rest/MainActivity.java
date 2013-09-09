@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
             HttpGet getUrl = new HttpGet(urlPath);
             HttpResponse response = httpClient.execute(getUrl);
             StatusLine statusLine = response.getStatusLine();
-            String responseString = "";
+            String responseString;
 
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
 
         int radioId = radioGroup.getCheckedRadioButtonId();
 
-        String responseUrl = "";
+        String responseUrl;
         String userName = nameTxt.getText().toString();
         String userAge = ageTxt.getText().toString();
 
