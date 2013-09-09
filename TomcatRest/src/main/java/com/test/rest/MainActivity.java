@@ -141,16 +141,6 @@ public class MainActivity extends Activity {
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtnJsonGet:
-                responseUrl = baseURL + "/rest/hello/json/get";
-                gud.execute(new String[] { responseUrl });
-                urlOutLbl.setText(responseUrl);
-                break;
-            case R.id.radioBtnJsonPost:
-                responseUrl = baseURL + "/rest/hello/json/post";
-                gud.execute(new String[] { responseUrl });
-                urlOutLbl.setText(responseUrl);
-                break;
         }
     }
 }
