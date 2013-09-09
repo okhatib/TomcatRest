@@ -27,12 +27,12 @@ public final class R {
         public static final int getDataBtn=0x7f08000b;
         public static final int outputLbl=0x7f08000e;
         public static final int outputTextLbl=0x7f08000f;
-        public static final int radioBtn1=0x7f080005;
-        public static final int radioBtn2=0x7f080006;
-        public static final int radioBtn3=0x7f080007;
-        public static final int radioBtn4=0x7f080008;
-        public static final int radioBtn5=0x7f080009;
-        public static final int radioBtn6=0x7f08000a;
+        public static final int radioBtnHelloWorld =0x7f080005;
+        public static final int radioBtnHelloName =0x7f080006;
+        public static final int radioBtnSelectedNumber =0x7f080007;
+        public static final int radioBtnEnteredPassword =0x7f080008;
+        public static final int radioBtnMatrixParam =0x7f080009;
+        public static final int radioBtnQueryParam =0x7f08000a;
         public static final int urlLbl=0x7f08000c;
         public static final int urlOutputLbl=0x7f08000d;
     }

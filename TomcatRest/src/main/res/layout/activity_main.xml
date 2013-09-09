@@ -46,48 +46,58 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Hello World (None)"
-                    android:id="@+id/radioBtn1" />
+                    android:id="@+id/radioBtnHelloWorld" />
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Hello Name (Name)"
-                    android:id="@+id/radioBtn2" />
+                    android:id="@+id/radioBtnHelloName" />
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Selected Number (Age)"
-                    android:id="@+id/radioBtn3" />
+                    android:id="@+id/radioBtnSelectedNumber" />
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Entered Password (Name)"
-                    android:id="@+id/radioBtn4" />
+                    android:id="@+id/radioBtnEnteredPassword" />
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="MatrixParam (Both)"
-                    android:id="@+id/radioBtn5" />
+                    android:id="@+id/radioBtnMatrixParam" />
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="QueryParam (Both)"
-                    android:id="@+id/radioBtn6" />
+                    android:id="@+id/radioBtnQueryParam" />
             </RadioGroup>
 
-
-            <Button
+            <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/RadioGrp"
-                android:text="Get Data"
-                android:id="@+id/getDataBtn"
-                android:layout_marginTop="20px"
-                android:onClick="GetDataBtn_Click" />
+                android:id="@+id/btnsTable"
+                android:layout_marginTop="20px" >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get Data"
+                    android:id="@+id/getDataBtn"
+                    android:onClick="GetDataBtn_Click" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/jsonBtn"
+                    android:text="JSON Activity"
+                    android:onClick="GoToJsonActivity_Click" />
+            </TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/getDataBtn"
+                android:layout_below="@id/btnsTable"
                 android:id="@+id/urlLbl"
                 android:text="URL: "
                 android:layout_marginTop="50px" />

@@ -1,12 +1,12 @@
 package com.test.rest;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -86,25 +86,6 @@ public class MainActivity extends Activity {
             return responseString;
         }
 
-        /*private String getOutputFromUrl(String url) {
-            String output = null;
-            try {
-                DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(url);
-
-                HttpResponse httpResponse = httpClient.execute(httpGet);
-                HttpEntity httpEntity = httpResponse.getEntity();
-                output = EntityUtils.toString(httpEntity);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return output;
-        }*/
-
         @Override
         protected void onPostExecute(String output) {
             //outputText.setText(output);
@@ -112,48 +93,61 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void GoToJsonActivity_Click(View v)
+    {
+        Intent i = new Intent(MainActivity.this,JSONMethods.class);
+        startActivity(i);
+    }
+
     public void GetDataBtn_Click(View v) throws IOException {
 
         GetUserData gud = new GetUserData();
 
         int radioId = radioGroup.getCheckedRadioButtonId();
-        //View rButton = radioGroup.findViewById(radioId);
-        //int index = radioGroup.indexOfChild(rButton);
 
         String responseUrl = "";
-        //String responseText = "";
         String userName = nameTxt.getText().toString();
         String userAge = ageTxt.getText().toString();
 
         switch (radioId)
         {
-            case R.id.radioBtn1:
+            case R.id.radioBtnHelloWorld:
                 responseUrl = baseURL + "/rest/hello";
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtn2:
+            case R.id.radioBtnHelloName:
                 responseUrl = baseURL + "/rest/hello/name/" + userName;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtn3:
+            case R.id.radioBtnSelectedNumber:
                 responseUrl = baseURL + "/rest/hello/number/" + userAge;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtn4:
+            case R.id.radioBtnEnteredPassword:
                 responseUrl = baseURL + "/rest/hello/login/" + userName;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtn5:
+            case R.id.radioBtnMatrixParam:
                 responseUrl = baseURL + "/rest/hello/matrix/2013;author=" + userName + ";age=" + userAge;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
-            case R.id.radioBtn6:
+            case R.id.radioBtnQueryParam:
                 responseUrl = baseURL + "/rest/hello/query?author=" + userName + "&age=" + userAge + "&orderBy=age&orderBy=name";
+                gud.execute(new String[] { responseUrl });
+                urlOutLbl.setText(responseUrl);
+                break;
+            case R.id.radioBtnJsonGet:
+                responseUrl = baseURL + "/rest/hello/json/get";
+                gud.execute(new String[] { responseUrl });
+                urlOutLbl.setText(responseUrl);
+                break;
+            case R.id.radioBtnJsonPost:
+                responseUrl = baseURL + "/rest/hello/json/post";
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
