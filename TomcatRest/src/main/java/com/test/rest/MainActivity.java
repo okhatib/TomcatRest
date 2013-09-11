@@ -10,12 +10,14 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -68,22 +70,11 @@ public class MainActivity extends Activity {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet getUrl = new HttpGet(urlPath);
             HttpResponse response = httpClient.execute(getUrl);
-            StatusLine statusLine = response.getStatusLine();
-            String responseString;
 
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-                responseString = out.toString();
-                //..more logic
-            } else{
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                throw new IndexOutOfBoundsException(statusLine.getReasonPhrase());
-            }
+            HttpEntity httpEntity = response.getEntity();
+            String output = EntityUtils.toString(httpEntity);
 
-            return responseString;
+            return output;
         }
 
         @Override

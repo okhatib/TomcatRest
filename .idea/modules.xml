@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TomcatRest/TomcatRest.iml" filepath="$PROJECT_DIR$/TomcatRest/TomcatRest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TomcatRestProject.iml" filepath="$PROJECT_DIR$/TomcatRestProject.iml" />
+    </modules>
+  </component>
+</project>
+
