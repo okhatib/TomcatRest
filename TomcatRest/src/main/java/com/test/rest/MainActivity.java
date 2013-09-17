@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -18,16 +19,26 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends Activity {
 
     public final static String baseURL = "http://tomcatrest-skyhawk.rhcloud.com/";
+    public final static String secureBaseURL = "https://tomcatrest-skyhawk.rhcloud.com/";
 
     RadioGroup radioGroup;
     EditText nameTxt;
     EditText ageTxt;
     TextView urlOutLbl;
     TextView responseOutLbl;
+    EditText usernameTxt;
+    EditText passwordTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,8 @@ public class MainActivity extends Activity {
         ageTxt = (EditText)findViewById(R.id.AgeTxt);
         urlOutLbl = (TextView)findViewById(R.id.urlOutputLbl);
         responseOutLbl = (TextView)findViewById(R.id.outputTextLbl);
+        usernameTxt = (EditText)findViewById(R.id.userNameTxt);
+        passwordTxt = (EditText)findViewById(R.id.passwordTxt);
     }
 
     @Override
@@ -64,12 +77,45 @@ public class MainActivity extends Activity {
 
         public String GetData(String urlPath) throws IOException
         {
+            URL url = new URL(urlPath);
+
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+
+            //((HttpsURLConnection) connection).setHostnameVerifier(new MyHostnameVerifier());
+            //connection.setRequestProperty("Content-Type", "text/plain; charset=\"utf8\"");
+            //connection.setRequestMethod(method);
+
+            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            byte[] encodeBytes = encode.getBytes();
+            String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
+
+            connection.setRequestProperty("Authorization", "Basic " + encoded);
+
+            String output = "";
+            //output = connection.getResponseMessage();
+
+            //send the POST out
+            //PrintWriter out = new PrintWriter(connection.getOutputStream());
+            //out.print(param);
+            //out.close();
+
+            //build the string to store the response text from the server
+
+            //start listening to the stream
+            Scanner inStream = new Scanner(connection.getInputStream());
+
+            //process the stream and store it in StringBuilder
+            while(inStream.hasNextLine())
+                output+=(inStream.nextLine());
+
+            /*
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet getUrl = new HttpGet(urlPath);
             HttpResponse response = httpClient.execute(getUrl);
 
             HttpEntity httpEntity = response.getEntity();
             String output = EntityUtils.toString(httpEntity);
+            */
 
             return output;
         }
@@ -100,32 +146,32 @@ public class MainActivity extends Activity {
         switch (radioId)
         {
             case R.id.radioBtnHelloWorld:
-                responseUrl = baseURL + "/rest/hello";
+                responseUrl = secureBaseURL + "/rest/hello";
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
             case R.id.radioBtnHelloName:
-                responseUrl = baseURL + "/rest/hello/name/" + userName;
+                responseUrl = secureBaseURL + "/rest/hello/name/" + userName;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
             case R.id.radioBtnSelectedNumber:
-                responseUrl = baseURL + "/rest/hello/number/" + userAge;
+                responseUrl = secureBaseURL + "/rest/hello/number/" + userAge;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
             case R.id.radioBtnEnteredPassword:
-                responseUrl = baseURL + "/rest/hello/login/" + userName;
+                responseUrl = secureBaseURL + "/rest/hello/login/" + userName;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
             case R.id.radioBtnMatrixParam:
-                responseUrl = baseURL + "/rest/hello/matrix/2013;author=" + userName + ";age=" + userAge;
+                responseUrl = secureBaseURL + "/rest/hello/matrix/2013;author=" + userName + ";age=" + userAge;
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;
             case R.id.radioBtnQueryParam:
-                responseUrl = baseURL + "/rest/hello/query?author=" + userName + "&age=" + userAge + "&orderBy=age&orderBy=name";
+                responseUrl = secureBaseURL + "/rest/hello/query?author=" + userName + "&age=" + userAge + "&orderBy=age&orderBy=name";
                 gud.execute(new String[] { responseUrl });
                 urlOutLbl.setText(responseUrl);
                 break;

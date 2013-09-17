@@ -13,10 +13,38 @@
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="match_parent">
             <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username: "
+                    android:id="@+id/userNameLbl" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userNameTxt"
+                    android:layout_below="@id/userNameLbl" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password: "
+                    android:layout_below="@id/userNameTxt"
+                    android:id="@+id/passwordLbl" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/passwordLbl"
+                    android:id="@+id/passwordTxt"
+                    android:inputType="textPassword" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your Name: "
-                android:id="@+id/NameLbl" />
+                android:id="@+id/NameLbl"
+                android:layout_below="@id/passwordTxt"
+                android:layout_marginTop="50px" />
 
             <EditText
                 android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.test.rest;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by Maro on 09/09/13.
@@ -29,6 +35,10 @@ import java.io.IOException;
 public class JSONMethods extends Activity {
 
     public final static String baseURL = "http://tomcatrest-skyhawk.rhcloud.com/rest/hello/cust";
+    public final static String secureBaseURL = "https://tomcatrest-skyhawk.rhcloud.com/rest/hello/cust";
+
+    EditText usernameTxt;
+    EditText passwordTxt;
 
     TextView jsonUrlText;
     TextView jsonOutputText;
@@ -46,6 +56,9 @@ public class JSONMethods extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.json_activity);
+
+        usernameTxt = (EditText)findViewById(R.id.jsonUserNameTxt);
+        passwordTxt = (EditText)findViewById(R.id.jsonPasswordTxt);
 
         jsonUrlText = (TextView)findViewById(R.id.jsonUrlText);
         jsonOutputText = (TextView)findViewById(R.id.jsonOutputText);
@@ -71,17 +84,18 @@ public class JSONMethods extends Activity {
     {
         GetJsonData getJson = new GetJsonData();
 
-        String responseUrl = baseURL + "/get/" + jsonIdIn.getText().toString();
+        String responseUrl = secureBaseURL + "/get/" + jsonIdIn.getText().toString();
 
         getJson.execute(new String[] { responseUrl });
 
         jsonUrlText.setText(responseUrl);
     }
 
-    public void jsonBtnPost_Click(View v) throws JSONException {
+    public void jsonBtnPost_Click(View v) throws JSONException
+    {
         PostJsonData postJson = new PostJsonData();
 
-        String responseUrl = baseURL + "/post/";
+        String responseUrl = secureBaseURL + "/post/";
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("firstName", jsonFirstNameIn.getText().toString());
@@ -103,7 +117,7 @@ public class JSONMethods extends Activity {
     {
         PutJsonData postJson = new PutJsonData();
 
-        String responseUrl = baseURL + "/put/" + jsonIdIn.getText().toString();
+        String responseUrl = secureBaseURL + "/put/" + jsonIdIn.getText().toString();
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("firstName", jsonFirstNameIn.getText().toString());
@@ -125,7 +139,7 @@ public class JSONMethods extends Activity {
     {
         DeleteJsonData deleteJson = new DeleteJsonData();
 
-        String responseUrl = baseURL + "/delete/" + jsonIdIn.getText().toString();
+        String responseUrl = secureBaseURL + "/delete/" + jsonIdIn.getText().toString();
 
         deleteJson.execute(new String[] { responseUrl });
 
@@ -148,12 +162,31 @@ public class JSONMethods extends Activity {
 
         public String GetData(String urlPath) throws IOException
         {
+            URL url = new URL(urlPath);
+
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            byte[] encodeBytes = encode.getBytes();
+            String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
+
+            connection.setRequestProperty("Authorization", "Basic " + encoded);
+
+            String output = "";
+
+            Scanner inStream = new Scanner(connection.getInputStream());
+
+            //process the stream and store it in StringBuilder
+            while(inStream.hasNextLine())
+                output+=(inStream.nextLine());
+
+            /*
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet getUrl = new HttpGet(urlPath);
             HttpResponse response = httpClient.execute(getUrl);
 
             HttpEntity httpEntity = response.getEntity();
             String output = EntityUtils.toString(httpEntity);
+            */
 
             return output;
         }
@@ -174,6 +207,14 @@ public class JSONMethods extends Activity {
                 String city = jsonObject.getString("city");
                 String zip = jsonObject.getString("zip");
                 String country = jsonObject.getString("country");
+
+                jsonFirstNameIn.setText(firstName);
+                jsonLastNameIn.setText(lastName);
+                jsonStreetIn.setText(street);
+                jsonStateIn.setText(state);
+                jsonCityIn.setText(city);
+                jsonZipIn.setText(zip);
+                jsonCountryIn.setText(country);
 
                 output = "ID: " + id + " -- First Name: " + firstName + " -- Last Name: " + lastName + " -- Street: " + street;
                 output += " -- City: " + city + " -- State: " + state + " -- Zip: " + zip + " -- Country: " + country;
@@ -202,12 +243,32 @@ public class JSONMethods extends Activity {
 
         public String DeleteData(String urlPath) throws IOException
         {
+            URL url = new URL(urlPath);
+
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            byte[] encodeBytes = encode.getBytes();
+            String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
+
+            connection.setRequestProperty("Authorization", "Basic " + encoded);
+            connection.setRequestMethod("DELETE");
+
+            String output = "";
+
+            Scanner inStream = new Scanner(connection.getInputStream());
+
+            //process the stream and store it in StringBuilder
+            while(inStream.hasNextLine())
+                output+=(inStream.nextLine());
+
+            /*
             HttpClient httpClient = new DefaultHttpClient();
             HttpDelete deleteUrl = new HttpDelete(urlPath);
             HttpResponse response = httpClient.execute(deleteUrl);
 
             HttpEntity httpEntity = response.getEntity();
             String output = EntityUtils.toString(httpEntity);
+            */
 
             return output;
         }
@@ -236,6 +297,30 @@ public class JSONMethods extends Activity {
 
         public String PostData(String urlPath, String input) throws IOException
         {
+            URL url = new URL(urlPath);
+
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            byte[] encodeBytes = encode.getBytes();
+            String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
+            connection.setRequestProperty("Content-type", "application/json");
+            connection.setRequestProperty("Authorization", "Basic " + encoded);
+            connection.setRequestMethod("POST");
+
+            //send the POST out
+            PrintWriter out = new PrintWriter(connection.getOutputStream());
+            out.print(input);
+            out.close();
+
+            String output = "";
+
+            Scanner inStream = new Scanner(connection.getInputStream());
+
+            //process the stream and store it in StringBuilder
+            while(inStream.hasNextLine())
+                output+=(inStream.nextLine());
+
+            /*
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost postUrl = new HttpPost(urlPath);
 
@@ -246,6 +331,7 @@ public class JSONMethods extends Activity {
 
             HttpEntity httpEntity = response.getEntity();
             String output = EntityUtils.toString(httpEntity);
+            */
 
             return output;
         }
@@ -274,6 +360,30 @@ public class JSONMethods extends Activity {
 
         public String PutData(String urlPath, String input) throws IOException
         {
+            URL url = new URL(urlPath);
+
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            byte[] encodeBytes = encode.getBytes();
+            String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
+            connection.setRequestProperty("Content-type", "application/json");
+            connection.setRequestProperty("Authorization", "Basic " + encoded);
+            connection.setRequestMethod("PUT");
+
+            //send the POST out
+            PrintWriter out = new PrintWriter(connection.getOutputStream());
+            out.print(input);
+            out.close();
+
+            String output = "";
+
+            Scanner inStream = new Scanner(connection.getInputStream());
+
+            //process the stream and store it in StringBuilder
+            while(inStream.hasNextLine())
+                output+=(inStream.nextLine());
+
+            /*
             HttpClient httpClient = new DefaultHttpClient();
             HttpPut postUrl = new HttpPut(urlPath);
 
@@ -284,6 +394,7 @@ public class JSONMethods extends Activity {
 
             HttpEntity httpEntity = response.getEntity();
             String output = EntityUtils.toString(httpEntity);
+            */
 
             return output;
         }
