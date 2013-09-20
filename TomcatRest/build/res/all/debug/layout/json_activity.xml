@@ -20,34 +20,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username: "
-                    android:id="@+id/jsonUserNameLbl" />
+                    android:id="@+id/jsonUserNameLbl"
+                    android:visibility="gone" />
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/jsonUserNameTxt"
-                    android:layout_below="@id/jsonUserNameLbl" />
+                    android:layout_below="@id/jsonUserNameLbl"
+                    android:visibility="gone" />
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Password: "
                     android:layout_below="@id/jsonUserNameTxt"
-                    android:id="@+id/jsonPasswordLbl" />
+                    android:id="@+id/jsonPasswordLbl"
+                    android:visibility="gone" />
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/jsonPasswordLbl"
                     android:id="@+id/jsonPasswordTxt"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:visibility="gone" />
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/jsonDataTable"
-                android:layout_below="@id/jsonPasswordTxt"
-                android:layout_marginTop="50px" >
+                android:layout_below="@id/jsonPasswordTxt" >
 
                 <TextView
                     android:id="@+id/jsonIDLbl"

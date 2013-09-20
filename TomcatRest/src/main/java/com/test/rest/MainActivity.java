@@ -1,9 +1,12 @@
 package com.test.rest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
@@ -32,26 +35,33 @@ public class MainActivity extends Activity {
     public final static String baseURL = "http://tomcatrest-skyhawk.rhcloud.com/";
     public final static String secureBaseURL = "https://tomcatrest-skyhawk.rhcloud.com/";
 
+    private SharedPreferences mPrefs;
+
     RadioGroup radioGroup;
     EditText nameTxt;
     EditText ageTxt;
     TextView urlOutLbl;
     TextView responseOutLbl;
-    EditText usernameTxt;
-    EditText passwordTxt;
+    String usernameTxt;
+    String passwordTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
         radioGroup = (RadioGroup)findViewById(R.id.RadioGrp);
         nameTxt = (EditText)findViewById(R.id.NameTxt);
         ageTxt = (EditText)findViewById(R.id.AgeTxt);
         urlOutLbl = (TextView)findViewById(R.id.urlOutputLbl);
         responseOutLbl = (TextView)findViewById(R.id.outputTextLbl);
-        usernameTxt = (EditText)findViewById(R.id.userNameTxt);
-        passwordTxt = (EditText)findViewById(R.id.passwordTxt);
+        //usernameTxt = (EditText)findViewById(R.id.userNameTxt);
+        //passwordTxt = (EditText)findViewById(R.id.passwordTxt);
+
+        usernameTxt = mPrefs.getString("username", "");
+        passwordTxt = mPrefs.getString("password", "");
     }
 
     @Override
@@ -85,7 +95,7 @@ public class MainActivity extends Activity {
             //connection.setRequestProperty("Content-Type", "text/plain; charset=\"utf8\"");
             //connection.setRequestMethod(method);
 
-            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            String encode = usernameTxt + ":" + passwordTxt;
             byte[] encodeBytes = encode.getBytes();
             String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
 

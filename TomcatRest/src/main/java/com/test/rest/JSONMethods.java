@@ -1,8 +1,10 @@
 package com.test.rest;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
@@ -37,8 +39,10 @@ public class JSONMethods extends Activity {
     public final static String baseURL = "http://tomcatrest-skyhawk.rhcloud.com/rest/hello/cust";
     public final static String secureBaseURL = "https://tomcatrest-skyhawk.rhcloud.com/rest/hello/cust";
 
-    EditText usernameTxt;
-    EditText passwordTxt;
+    private SharedPreferences mPrefs;
+
+    String usernameTxt;
+    String passwordTxt;
 
     TextView jsonUrlText;
     TextView jsonOutputText;
@@ -57,8 +61,10 @@ public class JSONMethods extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.json_activity);
 
-        usernameTxt = (EditText)findViewById(R.id.jsonUserNameTxt);
-        passwordTxt = (EditText)findViewById(R.id.jsonPasswordTxt);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(JSONMethods.this);
+
+        usernameTxt = mPrefs.getString("username", "");
+        passwordTxt = mPrefs.getString("password", "");
 
         jsonUrlText = (TextView)findViewById(R.id.jsonUrlText);
         jsonOutputText = (TextView)findViewById(R.id.jsonOutputText);
@@ -165,7 +171,7 @@ public class JSONMethods extends Activity {
             URL url = new URL(urlPath);
 
             HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            String encode = usernameTxt + ":" + passwordTxt;
             byte[] encodeBytes = encode.getBytes();
             String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
 
@@ -246,7 +252,7 @@ public class JSONMethods extends Activity {
             URL url = new URL(urlPath);
 
             HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            String encode = usernameTxt + ":" + passwordTxt;
             byte[] encodeBytes = encode.getBytes();
             String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
 
@@ -300,7 +306,7 @@ public class JSONMethods extends Activity {
             URL url = new URL(urlPath);
 
             HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            String encode = usernameTxt + ":" + passwordTxt;
             byte[] encodeBytes = encode.getBytes();
             String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
             connection.setRequestProperty("Content-type", "application/json");
@@ -363,7 +369,7 @@ public class JSONMethods extends Activity {
             URL url = new URL(urlPath);
 
             HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            String encode = usernameTxt.getText().toString() + ":" + passwordTxt.getText().toString();
+            String encode = usernameTxt + ":" + passwordTxt;
             byte[] encodeBytes = encode.getBytes();
             String encoded = Base64.encodeToString(encodeBytes, Base64.DEFAULT);
             connection.setRequestProperty("Content-type", "application/json");
