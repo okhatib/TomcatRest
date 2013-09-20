@@ -23,48 +23,48 @@ public final class R {
         public static final int NameLbl=0x7f08000b;
         public static final int NameTxt=0x7f08000c;
         public static final int RadioGrp=0x7f08000f;
-        public static final int action_forgot_password=0x7f08003b;
-        public static final int action_settings=0x7f08003c;
+        public static final int action_forgot_password=0x7f08003f;
+        public static final int action_settings=0x7f080040;
         public static final int btnsTable=0x7f080016;
         public static final int email=0x7f080003;
         public static final int getDataBtn=0x7f080017;
         public static final int jsonBtn=0x7f080018;
-        public static final int jsonBtnsTable=0x7f080032;
-        public static final int jsonCityLbl=0x7f080028;
-        public static final int jsonCityTxt=0x7f080029;
-        public static final int jsonCountryLbl=0x7f080030;
-        public static final int jsonCountryTxt=0x7f080031;
-        public static final int jsonDataTable=0x7f080021;
-        public static final int jsonDeleteMethod=0x7f080036;
-        public static final int jsonFirstNameLbl=0x7f080024;
-        public static final int jsonFirstNameTxt=0x7f080025;
-        public static final int jsonGetMethod=0x7f080033;
-        public static final int jsonIDLbl=0x7f080022;
-        public static final int jsonIDTxt=0x7f080023;
-        public static final int jsonLastNameLbl=0x7f080026;
-        public static final int jsonLastNameTxt=0x7f080027;
-        public static final int jsonOutputLbl=0x7f080039;
-        public static final int jsonOutputText=0x7f08003a;
-        public static final int jsonPasswordLbl=0x7f08001f;
-        public static final int jsonPasswordTxt=0x7f080020;
-        public static final int jsonPostMethod=0x7f080034;
-        public static final int jsonPutMethod=0x7f080035;
-        public static final int jsonStateLbl=0x7f08002c;
-        public static final int jsonStateTxt=0x7f08002d;
-        public static final int jsonStreetLbl=0x7f08002a;
-        public static final int jsonStreetTxt=0x7f08002b;
-        public static final int jsonUrlLbl=0x7f080037;
-        public static final int jsonUrlText=0x7f080038;
-        public static final int jsonUserNameLbl=0x7f08001d;
-        public static final int jsonUserNameTxt=0x7f08001e;
-        public static final int jsonZipLbl=0x7f08002e;
-        public static final int jsonZipTxt=0x7f08002f;
+        public static final int jsonBtnsTable=0x7f080036;
+        public static final int jsonCityLbl=0x7f08002c;
+        public static final int jsonCityTxt=0x7f08002d;
+        public static final int jsonCountryLbl=0x7f080034;
+        public static final int jsonCountryTxt=0x7f080035;
+        public static final int jsonDataTable=0x7f080025;
+        public static final int jsonDeleteMethod=0x7f08003a;
+        public static final int jsonFirstNameLbl=0x7f080028;
+        public static final int jsonFirstNameTxt=0x7f080029;
+        public static final int jsonGetMethod=0x7f080037;
+        public static final int jsonIDLbl=0x7f080026;
+        public static final int jsonIDTxt=0x7f080027;
+        public static final int jsonLastNameLbl=0x7f08002a;
+        public static final int jsonLastNameTxt=0x7f08002b;
+        public static final int jsonOutputLbl=0x7f08003d;
+        public static final int jsonOutputText=0x7f08003e;
+        public static final int jsonPasswordLbl=0x7f080023;
+        public static final int jsonPasswordTxt=0x7f080024;
+        public static final int jsonPostMethod=0x7f080038;
+        public static final int jsonPutMethod=0x7f080039;
+        public static final int jsonStateLbl=0x7f080030;
+        public static final int jsonStateTxt=0x7f080031;
+        public static final int jsonStreetLbl=0x7f08002e;
+        public static final int jsonStreetTxt=0x7f08002f;
+        public static final int jsonUrlLbl=0x7f08003b;
+        public static final int jsonUrlText=0x7f08003c;
+        public static final int jsonUserNameLbl=0x7f080021;
+        public static final int jsonUserNameTxt=0x7f080022;
+        public static final int jsonZipLbl=0x7f080032;
+        public static final int jsonZipTxt=0x7f080033;
         public static final int login=0x7f080005;
         public static final int login_form=0x7f080002;
         public static final int login_status=0x7f080000;
         public static final int login_status_message=0x7f080001;
-        public static final int outputLbl=0x7f08001b;
-        public static final int outputTextLbl=0x7f08001c;
+        public static final int outputLbl=0x7f08001c;
+        public static final int outputTextLbl=0x7f08001d;
         public static final int password=0x7f080004;
         public static final int passwordLbl=0x7f080009;
         public static final int passwordTxt=0x7f08000a;
@@ -75,19 +75,25 @@ public final class R {
         public static final int radioBtnQueryParam=0x7f080015;
         public static final int radioBtnSelectedNumber=0x7f080012;
         public static final int sign_in_button=0x7f080006;
-        public static final int urlLbl=0x7f080019;
-        public static final int urlOutputLbl=0x7f08001a;
+        public static final int urlLbl=0x7f08001a;
+        public static final int urlOutputLbl=0x7f08001b;
         public static final int userNameLbl=0x7f080007;
         public static final int userNameTxt=0x7f080008;
+        public static final int xmlBtn=0x7f080019;
+        public static final int xmlInput=0x7f08001e;
+        public static final int xmlOutput=0x7f080020;
+        public static final int xmlParseBtn=0x7f08001f;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int json_activity=0x7f030002;
+        public static final int activity_xml=0x7f030002;
+        public static final int json_activity=0x7f030003;
     }
     public static final class menu {
         public static final int login=0x7f070000;
         public static final int main=0x7f070001;
+        public static final int xml=0x7f070002;
     }
     public static final class string {
         public static final int action_forgot_password=0x7f050000;
@@ -105,6 +111,7 @@ public final class R {
         public static final int prompt_password=0x7f05000c;
         public static final int prompt_username=0x7f05000d;
         public static final int title_activity_login=0x7f05000e;
+        public static final int title_activity_xml=0x7f05000f;
     }
     public static final class style {
         /** 

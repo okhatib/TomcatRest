@@ -123,6 +123,14 @@
                     android:id="@+id/jsonBtn"
                     android:text="JSON Activity"
                     android:onClick="GoToJsonActivity_Click" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/xmlBtn"
+                    android:text="XML"
+                    android:onClick="GoToXmlActivity_Click" />
+
             </TableRow>
 
             <TextView

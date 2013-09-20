@@ -19,6 +19,7 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_username">Username</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_xml">XmlActivity</string>
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

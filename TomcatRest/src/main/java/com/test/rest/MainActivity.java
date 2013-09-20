@@ -143,6 +143,12 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+    public void GoToXmlActivity_Click(View v)
+    {
+        Intent i = new Intent(MainActivity.this,XmlActivity.class);
+        startActivity(i);
+    }
+
     public void GetDataBtn_Click(View v) throws IOException {
 
         GetUserData gud = new GetUserData();
